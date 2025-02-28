@@ -1,101 +1,279 @@
-import Image from "next/image";
+"use client";
+import React, { useState, useEffect } from "react";
+import Link from "next/link";
+import { motion, AnimatePresence } from "framer-motion";
+import { ChevronDown, Menu, X } from "lucide-react";
+import { FaCode, FaDatabase, FaRobot, FaPencilAlt, FaChartLine } from "react-icons/fa";
+import AboutSection from "./LandingComp/About";  // Adjust the path accordingly
+import ServiceSection from "./LandingComp/Service";
+import ContactSection from "./LandingComp/Contact";
 
-export default function Home() {
+
+const Page: React.FC = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [servicesOpen, setServicesOpen] = useState(false);
+  const [whatWeDoOpen, setWhatWeDoOpen] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <>
+      {/* Navbar */}
+      <nav className={`fixed top-0 left-0 w-full bg-black bg-opacity-90 shadow-md z-50 transition-all ${scrolled ? "py-3" : "py-4"}`}>
+        <div className="container mx-auto flex justify-between items-center px-6">
+          {/* Logo */}
+          <h1 className="text-xl font-bold text-white">BrookBytes</h1>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+          {/* Mobile Menu Button */}
+          <button className="md:hidden text-white" onClick={() => setMenuOpen(!menuOpen)}>
+            {menuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+
+          {/* Desktop Menu */}
+          <ul className="hidden md:flex space-x-6 text-white">
+            <li>
+              <Link href="/" className="hover:text-gray-400 transition-all">Home</Link>
+            </li>
+            <li>
+              <Link href="#about" className="hover:text-gray-400 transition-all">About</Link>
+            </li>
+            
+            {/* Services Dropdown */}
+            <li className="relative group">
+              <button
+                onMouseEnter={() => setServicesOpen(true)}
+                onMouseLeave={() => setServicesOpen(false)}
+                className="flex items-center hover:text-gray-400 transition-all"
+              >
+                Services
+                <motion.span
+                  animate={{ rotate: servicesOpen ? 180 : 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="ml-1"
+                >
+                  <ChevronDown size={16} />
+                </motion.span>
+              </button>
+              <AnimatePresence>
+                {servicesOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    onMouseEnter={() => setServicesOpen(true)}
+                    onMouseLeave={() => setServicesOpen(false)}
+                    className="absolute left-0 mt-2 w-56 bg-black text-white rounded-xl shadow-lg overflow-hidden"
+                  >
+                    {[{ name: "Web Development", path: "./webdev" },
+                      { name: "SEO Services", path: "./seo" },
+                      { name: "SMM", path: "./smm" }].map((item) => (
+                      <Link
+                        key={item.name}
+                        href={item.path}
+                        className="block px-5 py-3 hover:bg-gray-800 transition-all"
+                      >
+                        {item.name}
+                      </Link>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </li>
+            
+
+            {/* What We Do Dropdown */}
+            <li className="relative group">
+              <button
+                onMouseEnter={() => setWhatWeDoOpen(true)}
+                onMouseLeave={() => setWhatWeDoOpen(false)}
+                className="flex items-center hover:text-gray-400 transition-all"
+              >
+                What We Can
+                <motion.span
+                  animate={{ rotate: whatWeDoOpen ? 180 : 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="ml-1"
+                >
+                  <ChevronDown size={16} />
+                </motion.span>
+              </button>
+              <AnimatePresence>
+                {whatWeDoOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    onMouseEnter={() => setWhatWeDoOpen(true)}
+                    onMouseLeave={() => setWhatWeDoOpen(false)}
+                    className="absolute left-0 mt-2 w-56 bg-black text-white rounded-xl shadow-lg overflow-hidden"
+                  >
+                    {[{ name: "Custom Websites", path: "/what-we-do/custom-websites" },
+                      { name: "SEO Optimization", path: "/what-we-do/seo-optimization" },
+                      { name: "AI Chatbots", path: "/what-we-do/ai-chatbots" },
+                      { name: "UI/UX Design", path: "/what-we-do/ui-ux-design" }].map((item) => (
+                      <Link
+                        key={item.name}
+                        href={item.path}
+                        className="block px-5 py-3 hover:bg-gray-800 transition-all"
+                      >
+                        {item.name}
+                      </Link>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </li>
+
+            
+            <li>
+              <Link href="./contact" className="hover:text-gray-400 transition-all">Contact</Link>
+            </li>
+          </ul>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+
+        {/* Mobile Menu */}
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            className="md:hidden absolute top-16 left-0 w-auto bg-black text-white rounded-lg shadow-lg p-4"
+          >
+            <ul className="space-y-3">
+              <li><Link href="http://localhost:3000/" className="block px-4 py-2">Home</Link></li>
+
+              <li><Link href="/about" className="block px-4 py-2">About</Link></li>
+              
+              {/* Services Dropdown */}
+              <li>
+                <button
+                  className="block w-full text-left px-4 py-2"
+                  onClick={() => setServicesOpen(!servicesOpen)}
+                >
+                  Services
+                </button>
+                {servicesOpen && (
+                  <ul className="space-y-2 ml-4">
+                    <li><Link href="/webdev" className="block px-4 py-2">Web Development</Link></li>
+                    <li><Link href="./seo" className="block px-4 py-2">SEO Services</Link></li>
+                    <li><Link href="./smm" className="block px-4 py-2">SMM</Link></li>
+                  </ul>
+                )}
+              </li>
+              
+              {/* What We Do Dropdown */}
+              <li>
+                <button
+                  className="block w-full text-left px-4 py-2"
+                  onClick={() => setWhatWeDoOpen(!whatWeDoOpen)}
+                >
+                  What We can 
+                </button>
+                {whatWeDoOpen && (
+                  <ul className="space-y-2 ml-4">
+                    <li><Link href="/what-we-do1" className="block px-4 py-2">Full Stack</Link></li>
+                    <li><Link href="/what-we-do2" className="block px-4 py-2">part Of Project</Link></li>
+                    <li><Link href="/what-we-do3" className="block px-4 py-2">Data Manegment</Link></li>
+                  </ul>
+                )}
+              </li>
+
+              
+              <li><Link href="/contact" className="block px-4 py-2">Contact</Link></li>
+            </ul>
+          </motion.div>
+        )}
+      </AnimatePresence>
+      </nav>
+
+      
+      <section className="relative flex flex-col justify-center items-start text-left h-screen w-full bg-black text-white px-6 md:px-12">
+        {/* Video Background */}
+        <div className="absolute top-0 left-0 w-full h-full z-0">
+          <video autoPlay muted loop className="object-cover w-full h-full">
+            <source src="/images/bg.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        </div>
+
+        {/* Content Section with Smooth Animation */}
+        <motion.div 
+          initial={{ opacity: 0, y: 50 }} 
+          animate={{ opacity: 1, y: 0 }} 
+          transition={{ duration: 1.2, ease: "easeInOut" }}
+          className="max-w-3xl lg:w-2/3 mt-[1cm] ml-4 md:ml-16 z-10 relative text-left"
         >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+          <motion.h1 
+            initial={{ opacity: 0, y: -20 }} 
+            animate={{ opacity: 1, y: 0 }} 
+            transition={{ duration: 1.2, delay: 0.2, ease: "easeInOut" }}
+            className="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight whitespace-pre-line"
+          >
+            {"Elevate Your Business with \nBrookBytes"}
+          </motion.h1>
+          <motion.p 
+            initial={{ opacity: 0 }} 
+            animate={{ opacity: 1 }} 
+            transition={{ duration: 1.2, delay: 0.4, ease: "easeInOut" }}
+            className="mt-4 text-sm sm:text-base md:text-lg text-gray-300 whitespace-pre-line md:whitespace-normal md:max-w-lg"
+          >
+            {"Unlock the full potential of your business with cutting-edge web development, \nadvanced SEO, and AI-driven solutions tailored for success."}
+          </motion.p>
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.8 }} 
+            animate={{ opacity: 1, scale: 1 }} 
+            transition={{ duration: 1, delay: 0.6, ease: "easeInOut" }}
+            className="mt-6"
+          >
+            <a
+              href="#services"
+              className="px-6 py-3 border border-white text-white bg-transparent hover:bg-white hover:text-black transition-all duration-300 rounded-md"
+            >
+              Get Started
+            </a>
+          </motion.div>
+        </motion.div>
+      </section>
+
+      <motion.section 
+        id="about" 
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1.2, ease: "easeInOut" }}
+        viewport={{ once: true }}
+      >
+        <AboutSection/>
+      </motion.section>
+
+      <motion.section 
+        id="service" 
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1.2, ease: "easeInOut" }}
+        viewport={{ once: true }}
+      >
+        <ServiceSection/>
+      </motion.section>
+
+      <motion.section 
+        id="contact" 
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1.2, ease: "easeInOut" }}
+        viewport={{ once: true }}
+      >
+        <ContactSection/>
+      </motion.section>
+    </>
   );
-}
+};
+
+export default Page;
