@@ -218,9 +218,9 @@ const Page: React.FC = () => {
             initial={{ opacity: 0, y: -20 }} 
             animate={{ opacity: 1, y: 0 }} 
             transition={{ duration: 1.2, delay: 0.2, ease: "easeInOut" }}
-            className="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight whitespace-pre-line"
+            className="text-2xl sm:text-4xl md:text-5xl font-extrabold leading-tight whitespace-pre-line"
           >
-            {"Elevate Your Business with \nBrookBytes"}
+            {"Elevate Your Business with\nBrookBytes"}
           </motion.h1>
           <motion.p 
             initial={{ opacity: 0 }} 
