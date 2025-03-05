@@ -73,7 +73,8 @@ const Page: React.FC = () => {
                   >
                     {[{ name: "Web Development", path: "./webdev" },
                       { name: "SEO Services", path: "./seo" },
-                      { name: "SMM", path: "./smm" }].map((item) => (
+                      { name: "Digital campaign", path: "./smm" },
+                      { name: "UI/UX Design", path: "./uiandux" }].map((item) => (
                       <Link
                         key={item.name}
                         href={item.path}
@@ -95,7 +96,8 @@ const Page: React.FC = () => {
                 onMouseLeave={() => setWhatWeDoOpen(false)}
                 className="flex items-center hover:text-gray-400 transition-all"
               >
-                What We Can
+                Others 
+
                 <motion.span
                   animate={{ rotate: whatWeDoOpen ? 180 : 0 }}
                   transition={{ duration: 0.3 }}
@@ -114,10 +116,10 @@ const Page: React.FC = () => {
                     onMouseLeave={() => setWhatWeDoOpen(false)}
                     className="absolute left-0 mt-2 w-56 bg-black text-white rounded-xl shadow-lg overflow-hidden"
                   >
-                    {[{ name: "Custom Websites", path: "/what-we-do/custom-websites" },
-                      { name: "SEO Optimization", path: "/what-we-do/seo-optimization" },
-                      { name: "AI Chatbots", path: "/what-we-do/ai-chatbots" },
-                      { name: "UI/UX Design", path: "/what-we-do/ui-ux-design" }].map((item) => (
+                    {[{ name: "Full Stack", path: "./fullstack" },
+                      { name: "Part Of Project", path: "./partofus" },
+                      { name: "Data Management", path: "./data" },
+                      { name: "AI chatBot", path: "./chatbot" }].map((item) => (
                       <Link
                         key={item.name}
                         href={item.path}
@@ -150,7 +152,7 @@ const Page: React.FC = () => {
             <ul className="space-y-3">
               <li><Link href="http://localhost:3000/" className="block px-4 py-2">Home</Link></li>
 
-              <li><Link href="/about" className="block px-4 py-2">About</Link></li>
+              <li><Link href="#about" className="block px-4 py-2">About</Link></li>
               
               {/* Services Dropdown */}
               <li>
@@ -164,7 +166,8 @@ const Page: React.FC = () => {
                   <ul className="space-y-2 ml-4">
                     <li><Link href="/webdev" className="block px-4 py-2">Web Development</Link></li>
                     <li><Link href="./seo" className="block px-4 py-2">SEO Services</Link></li>
-                    <li><Link href="./smm" className="block px-4 py-2">SMM</Link></li>
+                    <li><Link href="./smm" className="block px-4 py-2">Digital campaign</Link></li>
+                    <li><Link href="./uiandux" className="block px-4 py-2">UI/UX Design</Link></li>
                   </ul>
                 )}
               </li>
@@ -175,13 +178,14 @@ const Page: React.FC = () => {
                   className="block w-full text-left px-4 py-2"
                   onClick={() => setWhatWeDoOpen(!whatWeDoOpen)}
                 >
-                  What We can 
+                  Others 
                 </button>
                 {whatWeDoOpen && (
                   <ul className="space-y-2 ml-4">
-                    <li><Link href="/what-we-do1" className="block px-4 py-2">Full Stack</Link></li>
-                    <li><Link href="/what-we-do2" className="block px-4 py-2">part Of Project</Link></li>
-                    <li><Link href="/what-we-do3" className="block px-4 py-2">Data Manegment</Link></li>
+                    <li><Link href="./fullstack" className="block px-4 py-2">Full Stack</Link></li>
+                    <li><Link href="./partofus" className="block px-4 py-2">Part Of Project</Link></li>
+                    <li><Link href="./data" className="block px-4 py-2">Data Manegment</Link></li>
+                    <li><Link href="./chatbot" className="block px-4 py-2">AI Chatbot</Link></li>
                   </ul>
                 )}
               </li>
@@ -194,7 +198,6 @@ const Page: React.FC = () => {
       </AnimatePresence>
       </nav>
 
-      
       <section className="relative flex flex-col justify-center items-start text-left h-screen w-full bg-black text-white px-6 md:px-12">
         {/* Video Background */}
         <div className="absolute top-0 left-0 w-full h-full z-0">

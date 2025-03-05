@@ -21,7 +21,7 @@ const Navbar: React.FC = () => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 w-full bg-black bg-opacity-90 shadow-md z-50 transition-all ${scrolled ? "py-3" : "py-4"}`}
+      className={`fixed top-0 left-0 w-full bg-black bg-opacity-100 shadow-md z-50 transition-all ${scrolled ? "py-3" : "py-4"}`}
     >
       <div className="container mx-auto flex justify-between items-center px-6">
         {/* Logo */}
@@ -77,7 +77,8 @@ const Navbar: React.FC = () => {
                 >
                   {[{ name: "Web Development", path: "/webdev" },
                     { name: "SEO Services", path: "/seo" },
-                    { name: "SMM", path: "/smm" }].map((item) => (
+                    { name: "UI/UX Design", path: "/seo" },
+                    { name: "Digital Campaign", path: "/smm" }].map((item) => (
                     <Link
                       key={item.name}
                       href={item.path}
@@ -98,7 +99,7 @@ const Navbar: React.FC = () => {
               onMouseLeave={() => setWhatWeDoOpen(false)}
               className="flex items-center hover:text-gray-400 transition-all"
             >
-              What We Can
+            Others
               <motion.span
                 animate={{ rotate: whatWeDoOpen ? 180 : 0 }}
                 transition={{ duration: 0.3 }}
@@ -117,10 +118,10 @@ const Navbar: React.FC = () => {
                   onMouseLeave={() => setWhatWeDoOpen(false)}
                   className="absolute left-0 mt-2 w-56 bg-black text-white rounded-xl shadow-lg overflow-hidden"
                 >
-                  {[{ name: "Custom Websites", path: "/what-we-do/custom-websites" },
-                    { name: "SEO Optimization", path: "/what-we-do/seo-optimization" },
-                    { name: "AI Chatbots", path: "/what-we-do/ai-chatbots" },
-                    { name: "UI/UX Design", path: "/what-we-do/ui-ux-design" }].map((item) => (
+                  {[{ name: "Data Manegment", path: "custom-websites" },
+                    { name: "part Of Project", path: "./partofus" },
+                    { name: "AI Chatbots", path: "./chatbot" },
+                    { name: "UI/UX Design", path: "ui-ux-design" }].map((item) => (
                     <Link
                       key={item.name}
                       href={item.path}
@@ -179,13 +180,18 @@ const Navbar: React.FC = () => {
                       </Link>
                     </li>
                     <li>
-                      <Link href="/seo" className="block px-4 py-2">
+                      <Link href="./seo" className="block px-4 py-2">
                         SEO Services
                       </Link>
                     </li>
                     <li>
                       <Link href="/smm" className="block px-4 py-2">
-                        SMM
+                      Digital campaign
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="/smm" className="block px-4 py-2">
+                      UI/UX Design
                       </Link>
                     </li>
                   </ul>
@@ -198,22 +204,22 @@ const Navbar: React.FC = () => {
                   className="block w-full text-left px-4 py-2"
                   onClick={() => setWhatWeDoOpen(!whatWeDoOpen)}
                 >
-                  What We Can
+                  Others
                 </button>
                 {whatWeDoOpen && (
                   <ul className="space-y-2 ml-4">
                     <li>
                       <Link href="/what-we-do/custom-websites" className="block px-4 py-2">
-                        Custom Websites
+                       Data Management
                       </Link>
                     </li>
                     <li>
-                      <Link href="/what-we-do/seo-optimization" className="block px-4 py-2">
-                        SEO Optimization
+                      <Link href="./partofus" className="block px-4 py-2">
+                        Part of Project
                       </Link>
                     </li>
                     <li>
-                      <Link href="/what-we-do/ai-chatbots" className="block px-4 py-2">
+                      <Link href="./chatbot" className="block px-4 py-2">
                         AI Chatbots
                       </Link>
                     </li>
