@@ -25,11 +25,12 @@ const Page: React.FC = () => {
 
   return (
     <>
+    
       {/* Navbar */}
       <nav className={`fixed top-0 left-0 w-full bg-black bg-opacity-90 shadow-md z-50 transition-all ${scrolled ? "py-3" : "py-4"}`}>
         <div className="container mx-auto flex justify-between items-center px-6">
           {/* Logo */}
-          <h1 className="text-xl font-bold text-white">BrookBytes</h1>
+          <h1 className="text-xl font-bold text-white font-[\'Playfair Display\']">BrookBytes</h1>
 
           {/* Mobile Menu Button */}
           <button className="md:hidden text-white" onClick={() => setMenuOpen(!menuOpen)}>
@@ -162,6 +163,7 @@ const Page: React.FC = () => {
                 >
                   Services
                 </button>
+
                 {servicesOpen && (
                   <ul className="space-y-2 ml-4">
                     <li><Link href="/webdev" className="block px-4 py-2">Web Development</Link></li>

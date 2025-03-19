@@ -49,19 +49,21 @@ const SEOServicePage = () => {
         </div>
         
         {/* SEO Services Section */}
+        {/* SEO Services Section */}
         <motion.div className="mt-12 max-w-6xl w-full text-center"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <h2 className="text-3xl font-bold">Our SEO Services</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">Our SEO Services</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
             {seoServices.map((service, index) => (
-              <motion.div key={index} className="p-6 bg-gray-900 rounded-xl shadow-lg flex flex-col items-center text-center"
-                whileHover={{ scale: 1.1 }}>
-                <service.icon className="text-blue-400 text-4xl mb-4" />
-                <h3 className="text-xl font-semibold">{service.title}</h3>
-                <p className="text-gray-300 mt-2">{service.description}</p>
+              <motion.div key={index} 
+                className="p-6 bg-gray-900 rounded-xl shadow-lg flex flex-col items-center text-center border border-gray-800 hover:border-blue-400 transition duration-300"
+                whileHover={{ scale: 1.05 }}>
+                <service.icon className="text-blue-400 text-5xl mb-4" />
+                <h3 className="text-xl font-semibold text-white">{service.title}</h3>
+                <p className="text-gray-300 mt-2 text-base font-light">{service.description}</p>
               </motion.div>
             ))}
           </div>

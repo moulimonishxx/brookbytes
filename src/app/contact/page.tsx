@@ -119,6 +119,30 @@ const Contact: React.FC = () => {
           </button>
         </motion.form>
 
+        {/* Collaboration Section */}
+        <section className="flex flex-col items-center text-center w-full bg-gradient-to-b from-black to-gray-900 text-white px-6 md:px-12 py-14">
+          {/* Section Heading */}
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold">
+            <span className="text-blue-400"><em>Collaborate</em></span> with Industry Leaders
+          </h2>
+
+          {/* Partner Logos Grid (2x2) */}
+          <div className="grid grid-cols-2 gap-4 mt-6 w-full max-w-3xl">
+            {["cosmos.png", "partner2.png", "partner3.png", "partner4.png"].map((src, i) => (
+              <div 
+                key={i} 
+                className="flex justify-center items-center p-3 transition-transform transform hover:scale-105"
+              >
+                <img 
+                  src={`/images/collab-img/${src}`} 
+                  alt={`Partner ${i + 1}`} 
+                  className="h-20 sm:h-24 md:h-28 object-contain brightness-90 hover:brightness-100 transition-all duration-300"
+                />
+              </div>
+            ))}
+          </div>
+        </section>
+
         {/* Social Media Links */}
         <div className="flex justify-center gap-6 text-3xl">
           <FaWhatsapp className="text-white hover:text-gray-400 transition" />

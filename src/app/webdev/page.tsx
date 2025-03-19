@@ -74,7 +74,8 @@ const WebDevelopmentPage = () => {
         <h2 className="text-3xl font-bold">Technologies We Use</h2>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-6 mt-6">
           {[FaReact, FaNodeJs, FaDatabase, FaCss3Alt, FaJs, FaLaptopCode].map((Icon, index) => (
-            <motion.div key={index} className="p-6 bg-gray-900 rounded-xl shadow-lg flex justify-center items-center"
+            <motion.div key={index}
+             className="p-6 bg-gray-900 rounded-xl shadow-lg flex justify-center items-center"
               whileHover={{ scale: 1.1 }}>
               <Icon className="text-blue-400 text-4xl" />
             </motion.div>
@@ -92,8 +93,8 @@ const WebDevelopmentPage = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
           {projects.map((project, index) => (
             <motion.div key={index} 
-              className="bg-gray-900 rounded-xl overflow-hidden shadow-lg transform hover:scale-105 transition-all shadow-md hover:shadow-2xl"
-              whileHover={{ y: -5 }}
+               className="p-6 bg-gray-900 rounded-xl shadow-lg flex flex-col items-center text-center border border-gray-800 hover:border-blue-400 transition duration-300"
+               whileHover={{ scale: 1.05 }}
             >
               <img src={project.image} alt={project.title} className="w-full h-40 object-cover" />
               <div className="p-4">
